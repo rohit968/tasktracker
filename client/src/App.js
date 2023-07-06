@@ -7,7 +7,8 @@ import Taskform from './components/taskform/Taskform';
 import Navbar from './components/navbar/Navbar';
 
 const App = () => {
-  axios.defaults.baseURL = 'http://localhost:4001';
+  //axios.defaults.baseURL = 'http://localhost:4001';
+  axios.defaults.baseURL = 'https://tasktracker-backend.onrender.com';
   axios.defaults.withCredentials = true;
 
   return (
