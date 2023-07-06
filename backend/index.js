@@ -58,7 +58,7 @@ app.post('/register', upload.single('filename'), async (req, res) => {
     //Assigning a cookie
     jwt.sign({ userId: createdUser._id, name: createdUser.name, photo: createdUser.photo, email: createdUser.email }, jwtSecret, {}, (err, token) => {
       if (err) throw err;
-      res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', path: '/' }).status(201).json({ name: createdUser.name, email: createdUser.email, photo: createdUser.photo });
+      res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', path: '/', domain: '.onrender.com', }).status(201).json({ name: createdUser.name, email: createdUser.email, photo: createdUser.photo });
     })
   } catch (err) {
     res.status(401).json({ error: "User cannot be created" });
@@ -75,7 +75,7 @@ app.post('/login', upload.none(), async (req, res) => {
       if (passOk) {
         jwt.sign({ userId: findUser._id, name: findUser.name, email: findUser.email, photo: findUser.photo }, jwtSecret, {}, (err, token) => {
           if (err) throw err;
-          res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', path: '/' }).status(200).json(findUser);
+          res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'none', path: '/', domain: '.onrender.com', }).status(200).json(findUser);
         });
       } else {
         res.status(401).json({ error: "Password not matched" });
